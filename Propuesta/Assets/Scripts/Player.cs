@@ -84,6 +84,15 @@ public class Player : MonoBehaviour {
         if (Input.GetKeyUp(KeyCode.DownArrow)) {
             ArrowDown = false;
         }
+        if (Input.GetKey(KeyCode.Space) && rb.velocity.y < 0) {
+            rb.gravityScale = 0.6f;
+            transform.localScale = new Vector3(1.8f, 1f, transform.localScale.z);
+        }
+        if (Input.GetKeyUp(KeyCode.Space)) {
+            rb.gravityScale = 3;
+            transform.localScale = new Vector3(1, 2.1f, transform.localScale.z);
+        }
+
         rb.AddForce(new Vector2(20 * inputX, vely));
     }
     public void hurt(int damage) {
@@ -98,7 +107,7 @@ public class Player : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D col) {
-        if (col.gameObject.tag == "Suelo" || col.gameObject.tag == "Plataform") {
+        if (col.gameObject.tag == "Suelo" || col.gameObject.tag == "Plataform" || col.gameObject.tag=="break") {
             Jump_check = true;
         }//Limite de salto
         if (ArrowDown && col.gameObject.tag == "Plataform") {
@@ -122,13 +131,11 @@ public class Player : MonoBehaviour {
         }//Poder volver a subir a la plataforma
     }
     IEnumerator Agachado() {
-        Vector2 agachado = new Vector2(1.8f, 1f);
-        transform.localScale = new Vector3(agachado.x, agachado.y, transform.localScale.z);
+        transform.localScale = new Vector3(1.8f, 1f, transform.localScale.z);
         transform.position = new Vector3(transform.position.x, transform.position.y - 0.5556f, transform.position.z);
         yield return new WaitForSeconds(1.4f);
         transform.localScale = new Vector3(1,2.1f,transform.localScale.z);
         transform.position = new Vector3(transform.position.x, transform.position.y + 0.5556f, transform.position.z);
         agacharseActivo = false;
-
     }//Recupera su tamaño inicial despues del tiempo
 }
