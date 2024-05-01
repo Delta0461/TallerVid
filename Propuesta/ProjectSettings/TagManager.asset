@@ -10,6 +10,7 @@ TagManager:
   - Buff
   - Plataform
   - break
+  - Patas
   layers:
   - Default
   - TransparentFX

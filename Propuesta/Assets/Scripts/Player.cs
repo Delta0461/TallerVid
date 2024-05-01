@@ -13,6 +13,8 @@ public class Player : MonoBehaviour {
     bool ArrowDown = false;
     bool Invulnerability = false;
     bool agacharseActivo = false;
+    public GameObject patas;
+    public bool PatasPisando = true;
     void Start() {
         rb = GetComponent<Rigidbody2D>();
     }
@@ -70,6 +72,7 @@ public class Player : MonoBehaviour {
         rb.velocity = rbVel;
         if (Input.GetKeyDown(KeyCode.Space) && Jump_check) {
             Jump_check = false;
+            PatasPisando = false;
             vely = 700 * vel;
         }
 
@@ -107,7 +110,7 @@ public class Player : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D col) {
-        if (col.gameObject.tag == "Suelo" || col.gameObject.tag == "Plataform" || col.gameObject.tag=="break") {
+        if ((col.gameObject.tag == "Suelo" || col.gameObject.tag == "Plataform" || col.gameObject.tag=="break") && PatasPisando) {
             Jump_check = true;
         }//Limite de salto
         if (ArrowDown && col.gameObject.tag == "Plataform") {
