@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Suelo
+  - Enemy
+  - Debuff
+  - Buff
+  - Plataform
+  - break
+  - Patas
   layers:
   - Default
   - TransparentFX
